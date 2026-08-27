@@ -1,0 +1,11 @@
+Taruh file logo kamu di folder public/ ini, dengan nama PERSIS:
+
+  logo.png
+
+(File yang kamu punya itu satu gambar gabungan 3 logo — Tut Wuri Handayani,
+Universitas Tanjungpura, dan Diktisaintek Berdampak — jadi cukup satu file
+ini aja, nggak perlu dipisah.)
+
+Kalau file kamu bukan .png (misal .jpg atau .svg), tinggal ganti path
+"/logo.png" di app/page.tsx (bagian header, ada satu tag <img>) sesuai
+ekstensi filenya.

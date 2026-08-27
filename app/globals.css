@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-paper;
+  }
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    /* faint sketchbook grid, static */
+    background-image:
+      linear-gradient(rgba(31, 59, 44, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31, 59, 44, 0.07) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+  :focus-visible {
+    outline: 2px solid #1f3b2c;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .card-punch {
+    background-image: radial-gradient(circle, rgba(27, 34, 51, 0.14) 1.5px, transparent 1.6px);
+    background-size: 10px 10px;
+  }
+  .ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 35px,
+      rgba(31, 59, 44, 0.12) 36px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
