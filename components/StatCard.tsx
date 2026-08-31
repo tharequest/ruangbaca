@@ -14,7 +14,7 @@ export default function StatCard({ index, label, value, caption }: StatCardProps
           {index}
         </span>
         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brass">
-          Kartu Katalog
+          kartu informasi
         </span>
       </div>
       <p className="mt-4 font-display text-4xl leading-none text-ledger">{value}</p>
