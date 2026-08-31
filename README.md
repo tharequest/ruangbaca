@@ -1,4 +1,4 @@
-# Buku Tamu Digital — Dashboard Ruang Baca FMIPA UNTAN
+# Buku Tamu Digital - Dashboard Perpustakaan
 
 Dashboard kunjungan ruang baca/perpustakaan yang datanya **live-sync** langsung dari Google Sheet form presensi (BoloForms Signature), tanpa perlu upload manual.
 
