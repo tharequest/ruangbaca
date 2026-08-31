@@ -5,6 +5,7 @@ import DailyVisitsChart from "@/components/DailyVisitsChart";
 import ProdiChart from "@/components/ProdiChart";
 import RecentLedger from "@/components/RecentLedger";
 import SyncStamp from "@/components/SyncStamp";
+import AttendanceQR from "@/components/AttendanceQR";
 
 export const revalidate = 60;
 
@@ -22,8 +23,8 @@ export default async function DashboardPage() {
   const busiestDay = [...summary.dailyCounts].sort((a, b) => b.count - a.count)[0];
 
   return (
-    <main className="mx-auto min-h-screen max-w-5xl px-5 py-10 sm:px-8">
-      <header className="mb-10 flex flex-col gap-4 border-b-2 border-ledger/15 pb-6 sm:flex-row sm:items-end sm:justify-between">
+    <main className="mx-auto min-h-screen max-w-7xl px-6 py-10 sm:px-10 lg:px-14">
+      <header className="mb-8 flex flex-col gap-4 border-b-2 border-ledger/15 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <img
             src="/logo.png"
@@ -37,12 +38,14 @@ export default async function DashboardPage() {
             Buku Tamu Digital
           </h1>
           <p className="mt-2 max-w-md text-sm text-ink/60">
-            Rekap kunjungan ruang baca, tersinkron langsung dari database
-            presensi.
+            Rekap kunjungan ruang baca, tersinkron langsung dari lembar
+            presensi Google Sheet.
           </p>
         </div>
         <SyncStamp updatedAt={summary.updatedAt} />
       </header>
+
+      <AttendanceQR />
 
       {errorMessage && (
         <div className="mb-8 rounded-sm border border-stamp/40 bg-stamp/5 px-4 py-3 text-sm text-stamp">
@@ -84,7 +87,7 @@ export default async function DashboardPage() {
           <h2 className="font-display text-lg text-ledger">Tren Kunjungan</h2>
           <p className="mt-1 text-xs text-ink/50">
             Jumlah kunjungan per tanggal atau per bulan, berdasarkan kolom
-            Tanggal di database. Pilih periode &amp; tipe grafik di kanan atas.
+            Tanggal di sheet. Pilih periode &amp; tipe grafik di kanan atas.
           </p>
           <div className="mt-4">
             <DailyVisitsChart daily={summary.dailyCounts} monthly={summary.monthlyCounts} />
@@ -115,7 +118,7 @@ export default async function DashboardPage() {
       </section>
 
       <footer className="mt-10 pb-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-ink/35">
-        Data diambil langsung dari database presensi &middot; diperbarui otomatis tiap 60 detik
+        Data diambil langsung dari Google Sheet presensi &middot; diperbarui otomatis tiap 60 detik
       </footer>
     </main>
   );
