@@ -38,8 +38,8 @@ export default async function DashboardPage() {
             Buku Tamu Digital
           </h1>
           <p className="mt-2 max-w-md text-sm text-ink/60">
-            Rekap kunjungan ruang baca, tersinkron langsung dari lembar
-            presensi Google Sheet.
+            Rekap kunjungan ruang baca, tersinkron langsung dari database
+            presensi.
           </p>
         </div>
         <SyncStamp updatedAt={summary.updatedAt} />
@@ -87,7 +87,7 @@ export default async function DashboardPage() {
           <h2 className="font-display text-lg text-ledger">Tren Kunjungan</h2>
           <p className="mt-1 text-xs text-ink/50">
             Jumlah kunjungan per tanggal atau per bulan, berdasarkan kolom
-            Tanggal di sheet. Pilih periode &amp; tipe grafik di kanan atas.
+            Tanggal di database. Pilih periode &amp; tipe grafik di kanan atas.
           </p>
           <div className="mt-4">
             <DailyVisitsChart daily={summary.dailyCounts} monthly={summary.monthlyCounts} />
@@ -95,7 +95,7 @@ export default async function DashboardPage() {
         </div>
 
         <div className="rounded-sm border border-ledger/20 bg-card p-5 shadow-card lg:col-span-2">
-          <h2 className="font-display text-lg text-ledger">Kunjungan per Program Studi</h2>
+          <h2 className="font-display text-lg text-ledger">Kunjungan Mahasiswa per Program Studi</h2>
           <p className="mt-1 text-xs text-ink/50">
             Prodi dengan kunjungan terbanyak ke ruang baca.
           </p>
@@ -118,7 +118,7 @@ export default async function DashboardPage() {
       </section>
 
       <footer className="mt-10 pb-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-ink/35">
-        Data diambil langsung dari Google Sheet presensi &middot; diperbarui otomatis tiap 60 detik
+        Data diambil langsung dari database presensi &middot; diperbarui otomatis tiap 60 detik
       </footer>
     </main>
   );
