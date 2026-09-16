@@ -25,6 +25,12 @@ const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=
  * Only when both numbers are <=12 — genuinely ambiguous — do we fall back
  * to the order that column normally uses.
  *
+ * Extra safety net for the ambiguous case: a visit can't have happened in
+ * the future. If the assumed order produces a date after "now", the entry
+ * was almost certainly typed in the other day/month order by hand (e.g.
+ * someone typed a D/M/Y date into a column we assume is M/D/Y) — so we
+ * swap and use that instead.
+ *
  * MIN_YEAR / the +1 year ceiling are a safety net against stray typos
  * (e.g. a "2006" instead of "2026").
  */
@@ -53,13 +59,20 @@ function parseSheetDate(raw: string, assumeOrder: DateOrder = "MDY"): string | n
     month = g1;
     day = g2;
   } else if (g1 <= 12 && g2 <= 12) {
-    // Genuinely ambiguous -> use this column's known order.
+    // Genuinely ambiguous -> use this column's known order first.
     if (assumeOrder === "MDY") {
       month = g1;
       day = g2;
     } else {
       day = g1;
       month = g2;
+    }
+
+    // Sanity check: a visit can't be in the future. If it looks like it
+    // is, the hand-typed entry was probably in the other day/month order.
+    const candidate = new Date(Date.UTC(year, month - 1, day));
+    if (candidate.getTime() > Date.now()) {
+      [month, day] = [day, month];
     }
   } else {
     // Both >12: not a valid date either way.
